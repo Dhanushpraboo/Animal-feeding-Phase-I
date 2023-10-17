@@ -21,7 +21,71 @@
 ### Step 6: Edit their speed values and test to see how it looks. Drag all three animals into the Prefabs folder, choosing “Original Prefab”
 
 ## Program:
+### PlayerController:
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class playercontroller : MonoBehaviour
+{
+    public float horizontalInput;
+    public float speed = 10.0f;
+    public float xRange = 10f;
+    public GameObject projectilePrefab;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
+
+    }
+}
+~~~
+### Moveforward:
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Moveforward : MonoBehaviour
+{
+    public float speed = 40.0f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+    }
+}
+~~~
 ## Output:
-
+![op](1.png)
+![op](2.png)
+![op](3.png)
+![op](4.png)
 ## Result:
+Animal feeding game-Phase-1 using unity is developed successfully.
